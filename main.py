@@ -47,7 +47,7 @@ def main():
     title_label = tk.Label(root, text="TTI Shared Data", font=("Verdana", 24))
     title_label.pack(pady=20)
 
-    # Create a frame that will contain the buttons
+    # Create a frame that will contain the buttons for each customer
     buttons_frame = tk.Frame(root)
     buttons_frame.pack()
 
