@@ -1,11 +1,37 @@
 import tkinter as tk
 from tkinter import ttk
 from Benchmark import benchmark_logic
+from Creation import creation_logic
+from Flextronics import flextronics_logic
+from Jabil import jabil_logic
+from Kimball import kimball_logic
+from Neotech import neotech_logic
+from Plexus import plexus_logic
+from Sanmina import sanmina_logic
+from SMTC import smtc_logic
 
 
 def open_customer_module(customer_name):
-    if customer_name == "Benchmark":
-        benchmark_logic()
+    # Define a dictionary mapping customer names to their corresponding functions
+    customer_logic = {
+        "Benchmark": benchmark_logic,
+        "Creation": creation_logic,
+        "Flextronics": flextronics_logic,
+        "Jabil": jabil_logic,
+        "Kimball": kimball_logic,
+        "Neotech": neotech_logic,
+        "Plexus": plexus_logic,
+        "Sanmina": sanmina_logic,
+        "SMTC": smtc_logic
+    }
+
+    # Get the corresponding function based on customer name and call it
+    logic_function = customer_logic.get(customer_name)
+    if logic_function:
+        logic_function()
+    else:
+        # Handle the case where the customer name is not found
+        print(f"Customer '{customer_name}' not recognized.")
 
 
 def main():
@@ -15,10 +41,10 @@ def main():
 
     # Configure style for the buttons
     style = ttk.Style()
-    style.configure('TButton', font=('Times New Roman', 16), padding=10)
+    style.configure('TButton', font=('Verdana', 16), padding=10)
 
     # Creating a title label
-    title_label = tk.Label(root, text="TTI Shared Data", font=("Arial", 24))
+    title_label = tk.Label(root, text="TTI Shared Data", font=("Verdana", 24))
     title_label.pack(pady=20)
 
     # Create a frame that will contain the buttons
