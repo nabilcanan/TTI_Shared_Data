@@ -23,7 +23,11 @@ def benchmark_logic():
     benchmark_window.geometry("600x400")
 
     # Add content specific to the Benchmark module
-    label = tk.Label(benchmark_window, text="This is the Benchmark module", font=("Verdana", 16))
+    label = tk.Label(benchmark_window, text="This is the Benchmark module", font=("Verdana", 24))
+    label.pack(pady=20)
+
+    # Add content specific to the Benchmark module
+    label = tk.Label(benchmark_window, text="Here select the BOM file that you ran beforehand", font=("Verdana", 16))
     label.pack(pady=20)
 
     # Button for selecting and loading Excel file
