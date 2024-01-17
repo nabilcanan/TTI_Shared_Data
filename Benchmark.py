@@ -29,7 +29,3 @@ def benchmark_logic():
     # Button for selecting and loading Excel file
     load_button = tk.Button(benchmark_window, text="Select CPN Excel File", command=select_and_load_excel)
     load_button.pack(pady=10)
-
-    # Additional UI components and logic as needed...
-
-# Note: This function should be called from your main application
