@@ -9,6 +9,7 @@ from Neotech import neotech_logic
 from Plexus import plexus_logic
 from Sanmina import sanmina_logic
 from SMTC import smtc_logic
+import tkinterdnd2
 
 
 def open_customer_module(customer_name):
