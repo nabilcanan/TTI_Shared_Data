@@ -91,7 +91,7 @@ def neotech_logic():
             workbook = load_workbook(save_file_path)
             worksheet = workbook.active
 
-            # Apply wrap text for specific columns just going to do A for now
+            # Apply wrap text for specific columns just going to do A for now and implement more later 
             for row in worksheet.iter_rows(min_row=2):  # Skip the header row
                 for cell in row:
                     if cell.column_letter in ['A']:
