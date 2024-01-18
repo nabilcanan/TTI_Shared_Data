@@ -30,6 +30,7 @@ def benchmark_logic():
     label = tk.Label(benchmark_window, text="Here select the BOM file that you ran beforehand", font=("Verdana", 16))
     label.pack(pady=20)
 
-    # Button for selecting and loading Excel file
+    # Button for selecting and loading Excel file this load the CPN Excel file that we want
+    # Added to the correct Excel file and loaded them into pandas to display them into the run control
     load_button = tk.Button(benchmark_window, text="Select CPN Excel File", command=select_and_load_excel)
     load_button.pack(pady=10)

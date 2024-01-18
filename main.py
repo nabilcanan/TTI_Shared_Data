@@ -56,7 +56,7 @@ def open_customer_module(customer_name):
         "Plexus": plexus_logic,
         "Sanmina": sanmina_logic,
         "SMTC": smtc_logic,
-        # "Kauffman Engineering": kauffman_logic
+        # "Kauffman Engineering": kauffman_logic not yet used for any function or logitc
     }
 
     # Get the corresponding function based on customer name and call it
@@ -70,7 +70,7 @@ def open_customer_module(customer_name):
 
 def main():
     root = tk.Tk()
-    root.title("TTI_CPN Comparison")
+    root.title("Partnership TTI_CPN Comparison Program")
     root.geometry("1000x650")
 
     # Create canvas for GIF background and buttons
@@ -88,7 +88,7 @@ def main():
     update_background(canvas, frames, width=1000, height=650)
 
     # Title above the buttons
-    canvas.create_text(500, 50, text="TTI_Shared_Data", font=('Verdana', 24), fill='white')
+    canvas.create_text(500, 50, text="TTI Shared Data", font=('Verdana', 32), fill='white')
 
     # Customers list
     customers = ["Benchmark", "Creation", "Flextronics", "Jabil", "Kimball", "Neotech", "Plexus", "Sanmina", "SMTC"]
@@ -101,9 +101,9 @@ def main():
         # Create rectangle as button background
         btn_bg = canvas.create_rectangle(500 - button_width // 2, button_y - button_height // 2,
                                          500 + button_width // 2, button_y + button_height // 2,
-                                         fill='grey', outline='white', tags=customer)
+                                         fill='white', outline='white', tags=customer)
         # Create text on top of the rectangle
-        btn_text = canvas.create_text(500, button_y, text=customer, font=('Verdana', 16), fill='white', tags=customer)
+        btn_text = canvas.create_text(500, button_y, text=customer, font=('Verdana', 16), fill='black', tags=customer)
         # Bind the click event to the rectangle and text
         canvas.tag_bind(customer, '<Button-1>', lambda event, name=customer: button_click(name))
         button_y += 60  # Increment y position for the next button thus will provide a clear overview of the next coming buttons
