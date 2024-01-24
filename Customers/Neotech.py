@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox, font
+from tkinter import filedialog, messagebox
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
@@ -98,6 +98,7 @@ def neotech_logic():
             messagebox.showwarning("Cancelled", "Fourth file open cancelled.")
             return False
 
+    # This function is for saving the final file with the data the user will overlook
     def save_file(df_first):
         save_file_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files",
                                                                                             "*.xlsx")])
@@ -116,7 +117,8 @@ def neotech_logic():
                     try:
                         # Get the length of the cell value
                         column_widths.append(len(str(cell.value)))
-                    except StopIteration:  # StopIteration should work here to raise an error
+                    except StopIteration:  # StopIteration should work here to raise an error, once the error
+                        # is raised the error message will appear in another window for the user to show me
                         "You messed up"
                         pass
 
@@ -145,17 +147,14 @@ def neotech_logic():
                      fg=text_color)
     label.pack(pady=20)
 
-    # Neotech module instructions
-    my_font = font.Font(family="Verdana", size=20, underline=True)  # Define a font with underline
-    label = tk.Label(neotech_window, text="Instructions:", font=my_font, bg=bg_color, fg=text_color)
-    label.pack(pady=20)
-
     # Instructions for program
-    instructions = ("First you will select the file where we have our CPN's\n"
-                    "Next we will select the Latest Contract File for Neotech\n"
-                    "Next we will select our Neotech Backlog File\n"
-                    "Lastly we will select out Neotech Sales History File\n"
-                    "Finally SAVE your final file")
+    instructions = ("Instructions:\n"
+                    "1. Select the file containing the CPNs.\n"
+                    "2. Choose the Latest Contract File for Neotech.\n"
+                    "3. Select the Neotech Backlog File.\n"
+                    "4. Pick the Neotech Sales History File.\n"
+                    "5. Remember to SAVE your final file upon completion.")
+
     label = tk.Label(neotech_window, text=instructions, font=("Verdana", 20), bg=bg_color, fg=text_color)
     label.pack(pady=20)
 
