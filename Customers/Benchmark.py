@@ -6,7 +6,7 @@ from openpyxl.utils import get_column_letter
 
 
 # Benchmark
-# Completed
+# Not Completed, need to know which contract or award file we will use for 2nd column
 
 def benchmark_logic():
     # Create a new Toplevel window for Benchmark
@@ -46,23 +46,23 @@ def benchmark_logic():
             # any headers from that dataframe
             header_row_idx = None
             for idx, row in df_second_raw.iterrows():
-                if 'IPN' in row.values:
+                if 'Benchmark P/N' in row.values:
                     header_row_idx = idx
                     break
 
             if header_row_idx is not None and isinstance(header_row_idx, int):
                 # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
-                # Proceed with processing if 'IPN' column is found
-                if 'IPN' in df_second.columns:
-                    df_first['On Contract'] = df_first['CPN'].isin(df_second['IPN']).map(
+                # Proceed with processing if 'Benchmark P/N' column is found
+                if 'Benchmark P/N' in df_second.columns:
+                    df_first['On Contract'] = df_first['CPN'].isin(df_second['Benchmark P/N']).map(
                         {True: 'Y', False: ''})
                     return True
                 else:
-                    messagebox.showerror("Error", "IPN column not found in the second file.")
+                    messagebox.showerror("Error", "Benchmark P/N column not found in the second file.")
                     return False
             else:
-                messagebox.showerror("Error", "Header row with 'IPN' not found in the file.")
+                messagebox.showerror("Error", "Header row with 'Benchmark P/N' not found in the file.")
                 return False
         else:
             messagebox.showwarning("Cancelled", "Second file open cancelled.")

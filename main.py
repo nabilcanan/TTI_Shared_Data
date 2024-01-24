@@ -8,28 +8,28 @@ from Customers.Plexus import plexus_logic
 from Customers.Sanmina import sanmina_logic
 from Customers.SMTC import smtc_logic
 import tkinter as tk
-from tkinter import Canvas, simpledialog
+from tkinter import Canvas  # , simpledialog <--- add this line if you want to add a password and uncomment
 from gif.gif_logic import *
 
 
-def log_user_access(username):
-    with open("user_access_log.txt", "a") as log_file:
-        log_file.write(f"{username} accessed the application.\n")
+# def log_user_access(username):
+#     with open("user_access_log.txt", "a") as log_file:
+#         log_file.write(f"{username} accessed the application.\n")
 
 
-def ask_password():
-    # Create a simple password dialog
-    password = simpledialog.askstring("Password", "Enter password:", show='*')
-    # Check the password (for example, let's assume the correct password is "admin")
-    if password == "admin":
-        # If the password is correct, ask for the user's name
-        username = simpledialog.askstring("Name", "Enter your name:")
-        log_user_access(username)
-        # Launch the main application window
-        main()
-    else:
-        # If the password is incorrect, show an error message
-        tk.messagebox.showerror("Error", "Incorrect password")
+# def ask_password():
+#     # Create a simple password dialog
+#     password = simpledialog.askstring("Password", "Enter password:", show='*')
+#     # Check the password (for example, let's assume the correct password is "admin")
+#     if password == "admin":
+#         # If the password is correct, ask for the user's name
+#         username = simpledialog.askstring("Name", "Enter your name:")
+#         log_user_access(username)
+#         # Launch the main application window
+#         main()
+#     else:
+#         # If the password is incorrect, show an error message
+#         tk.messagebox.showerror("Error", "Incorrect password")
 
 
 def button_click(customer_name):
@@ -132,4 +132,4 @@ def main():
 
 
 if __name__ == "__main__":
-    ask_password()
+    main()

@@ -34,7 +34,6 @@ def jabil_logic():
             # Warning message if the file selection is cancelled
             messagebox.showwarning("Cancelled", "First file open cancelled.")
 
-
     def process_second_file(df_first):
         # Open a dialog to select the second file, typically the latest contract file for Jabil
         second_file_path = filedialog.askopenfilename(title="Select your LATEST Contract File for Jabil",
