@@ -12,6 +12,8 @@ from tkinter import Canvas  # , simpledialog <--- add this line if you want to a
 from gif.gif_logic import *
 
 
+# This logic is to check who is using the program, so we added an indicator to see who logs in
+
 # def log_user_access(username):
 #     with open("user_access_log.txt", "a") as log_file:
 #         log_file.write(f"{username} accessed the application.\n")
@@ -64,7 +66,7 @@ def open_customer_module(customer_name):
 def main():
     root = tk.Tk()
     root.title("Partnership TTI Program")
-    root.geometry("1000x650")
+    root.geometry("1000x550")
 
     # Add a button for opening the PowerPoint instructions
     instructions_button = tk.Button(root, text="Open Instructions", command=open_powerpoint)
@@ -86,8 +88,8 @@ def main():
     canvas.create_text(500, 50, text="TTI Shared Data", font=('Roboto', 32), fill=text_color)
 
     # Customers list
-    customers = ["Benchmark", "Creation", "Flextronics", "Jabil",
-                 "Kimball", "Neotech", "Plexus", "Sanmina", "SMTC"]
+    customers = ["Benchmark", "Creation", "Jabil",
+                 "Kimball", "Neotech", "Plexus", "Sanmina"]
 
     # Functionality for button hover effect
     def on_enter(tag):

@@ -3,7 +3,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 
 
-
 def read_file(file_path):
     if file_path.endswith('.csv'):
         return pd.read_csv(file_path)
@@ -37,6 +36,10 @@ def compare_files():
     cpn_df['In Sales History'] = cpn_values.isin(sales_history_df['Last Ship CPN'])
 
     display_results(cpn_df)
+
+
+# displaying results to be filtered accordingly on backlog file and the difference between the sales
+# history file this way we can analyze the CPN accordingly to bring in the columns and check for errors
 
 
 def display_results(df):

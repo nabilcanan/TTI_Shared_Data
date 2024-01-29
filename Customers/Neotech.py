@@ -5,7 +5,12 @@ from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 
 
+def press_action():
+    print("hello partnership")
+    pass
+
 # Completed
+
 
 def neotech_logic():
     # Create a new Toplevel window
@@ -80,7 +85,7 @@ def neotech_logic():
         if fourth_file_path:
             # Load the fourth file into a DataFrame
             df_fourth = pd.read_excel(fourth_file_path)
-            # Check if the required columns are in the fourth file
+            # Check if the required columns are in the fourth file and process them accordingly
             if 'Last Ship CPN' in df_fourth.columns and 'Last Ship Date' in df_fourth.columns:
                 # Group the data by 'Last Ship CPN' and get the latest (max) 'Last Ship Date' for each CPN
                 latest_ship_dates = df_fourth.groupby('Last Ship CPN')['Last Ship Date'].max()
@@ -90,7 +95,7 @@ def neotech_logic():
                     else latest_ship_dates.get(row['CPN']), axis=1)
                 return True
             else:
-                # Shows error message here if there are any issues
+                # Shows error message here if there are any issues with the True statement
                 messagebox.showerror("Error", "Required columns not found in the fourth file.")
                 return False
         else:
@@ -162,3 +167,5 @@ def neotech_logic():
     open_file_btn = tk.Button(neotech_window, text="Select Excel Files", command=open_and_process_file,
                               bg=button_color, fg=button_text_color, font=("Verdana", 16))
     open_file_btn.pack(pady=10)
+
+    press_action()

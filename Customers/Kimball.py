@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import filedialog, messagebox, font
+from tkinter import filedialog, messagebox
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
@@ -22,7 +22,7 @@ def kimball_logic():
         if first_file_path:
             df_first = pd.read_excel(first_file_path)  # Load the file into a DataFrame
             if 'CPN' in df_first.columns:
-                # Remove duplicates based on the 'CPN' column
+                # Remove duplicates based on the 'CPN' column, this is column A, but we search by header title
                 df_first = df_first.drop_duplicates(subset=['CPN'])
                 # Continue processing with other files if the first file is processed successfully
                 if process_second_file(df_first) and process_third_file(df_first) and process_fourth_file(df_first):
@@ -157,22 +157,20 @@ def kimball_logic():
     # Apply background color
     kimball_window.configure(bg=bg_color)
 
-    # Add content specific to the Benchmark module
+    # Add content specific to the Benchmark module you turned her against me,
+    # you have done that yourself ! You've allowed this dark lord to twist you mind.
     label = tk.Label(kimball_window, text="Welcome Partnership Member", font=("Verdana", 24), bg=bg_color,
                      fg=text_color)
     label.pack(pady=20)
 
-    # Neotech module instructions
-    my_font = font.Font(family="Verdana", size=20, underline=True)  # Define a font with underline
-    label = tk.Label(kimball_window, text="Instructions:", font=my_font, bg=bg_color, fg=text_color)
-    label.pack(pady=20)
-
     # Instructions for program
-    instructions = ("First you will select the file where we have our CPN's\n"
-                    "Next we will select the Latest Contract File for Neotech\n"
-                    "Next we will select our Neotech Backlog File\n"
-                    "Lastly we will select out Neotech Sales History File\n"
-                    "Finally SAVE your final file")
+    instructions = ("Instructions:\n"
+                    "1. Select the file containing the CPNs.\n"
+                    "2. Choose the Latest Contract File for Kimball.\n"
+                    "3. Select the Kimball Backlog File.\n"
+                    "4. Pick the Kimball Sales History File.\n"
+                    "5. Remember to SAVE your final file upon completion.")
+
     label = tk.Label(kimball_window, text=instructions, font=("Verdana", 20), bg=bg_color, fg=text_color)
     label.pack(pady=20)
 
