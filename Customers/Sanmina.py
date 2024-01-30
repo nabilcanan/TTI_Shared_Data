@@ -144,8 +144,8 @@ def sanmina_logic():
                 latest_ship_dates = df_fourth.groupby('Last Ship CPN')['Last Ship Date'].max()
                 # Update 'Last Ship Date' in the first DataFrame with the latest ship date where it is missing
                 df_first['Last Ship Date'] = df_first.apply(
-                    lambda row: row['Last Ship Date'] if pd.notna(row['Last Ship Date']) else latest_ship_dates.get(
-                        row['CPN']), axis=1)
+                    lambda row: row['Last Ship Date'] if pd.notna(row['Last Ship Date'])
+                    else latest_ship_dates.get(row['CPN']), axis=1)
                 return True
             else:
                 # Display an error message if the required columns are not found
