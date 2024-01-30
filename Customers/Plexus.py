@@ -25,7 +25,8 @@ def plexus_logic():
                 # Remove duplicates based on the 'CPN' column
                 df_first = df_first.drop_duplicates(subset=['CPN'])
                 # Continue processing with other files if the first file is processed successfully
-                if process_second_file(df_first) and process_third_file(df_first) and process_fourth_file(df_first):
+                if process_second_file(df_first) and process_third_file(df_first) and process_fourth_file(df_first)\
+                        and process_fifth_file(df_first):
                     # Save the final processed DataFrame
                     save_file(df_first)
             else:
@@ -147,6 +148,36 @@ def plexus_logic():
             messagebox.showinfo("Success", "Files processed, formatted, and saved successfully!")
         else:
             messagebox.showwarning("Cancelled", "File save cancelled.")
+
+    def process_fifth_file(df_first):
+        # Open a dialog to select the "Forecast Query" file
+        forecast_query_path = filedialog.askopenfilename(title="Select Forecast Query File",
+                                                         filetypes=[("Excel files", "*.xlsx;*.xls")])
+        if forecast_query_path:
+            # Load the "Forecast Query" file into a DataFrame
+            df_forecast_query = pd.read_excel(forecast_query_path)
+
+            # Check if 'Prod Alias' and 'Send to Planning' columns are present
+            if 'Prod Alias' in df_forecast_query.columns and 'Send to Planning' in df_forecast_query.columns:
+                # Filter the DataFrame to get only rows where 'Send to Planning' is 'Y'
+                valid_forecast_query = df_forecast_query[df_forecast_query['Send to Planning'] == 'Y']
+
+                # Create a set of CPNs from the filtered DataFrame
+                planning_cpn_set = set(valid_forecast_query['Prod Alias'])
+
+                # Update 'On Contract' column and print CPNs meeting the criteria
+                print("CPNs meeting criteria and updated with 'Y' in 'On Contract':")
+                for cpn in df_first['CPN']:
+                    if cpn in planning_cpn_set:
+                        df_first.loc[df_first['CPN'] == cpn, 'On Contract'] = 'Y'
+                        print(cpn)
+                return True
+            else:
+                messagebox.showerror("Error", "Required columns not found in the Forecast Query file.")
+                return False
+        else:
+            messagebox.showwarning("Cancelled", "Forecast Query file open cancelled.")
+            return False
 
     # Modern color scheme
     bg_color = '#3b5998'  # A shade of blue
