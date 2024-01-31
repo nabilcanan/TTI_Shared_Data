@@ -12,9 +12,6 @@ from tkinter import Canvas  # , simpledialog <--- add this line if you want to a
 from gif.gif_logic import *
 
 
-
-
-
 def button_click(customer_name):
     # Functionality to be executed when a label/button is clicked
     open_customer_module(customer_name)
@@ -85,6 +82,7 @@ def main():
     button_width = 300
     for customer in customers:
         tag_rect = f'rect_{customer}'
+        # Print out each of the customer tags in the terminal and display which one we are opening
         tag_text = f'text_{customer}'
 
         # Create rectangle as button background

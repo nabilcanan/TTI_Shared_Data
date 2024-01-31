@@ -3,6 +3,7 @@ from tkinter import filedialog, messagebox
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
+from Customers.jabil_query import new_function
 
 
 def press_action():
@@ -29,7 +30,7 @@ def jabil_logic():
                 # Remove duplicates based on the 'CPN' column
                 df_first = df_first.drop_duplicates(subset=['CPN'])
                 # Continue processing with other files if the first file is processed successfully
-                if process_second_file(df_first) and process_third_file(df_first) and process_fourth_file(df_first)\
+                if process_second_file(df_first) and process_third_file(df_first) and process_fourth_file(df_first) \
                         and process_fifth_file(df_first):
                     # Save the final processed DataFrame
                     save_file(df_first)
@@ -42,7 +43,7 @@ def jabil_logic():
 
     def process_second_file(df_first):
         # Open a dialog to select the second file, typically the latest contract file for Jabil
-        second_file_path = filedialog.askopenfilename(title="Select your LATEST Contract File for Jabil",
+        second_file_path = filedialog.askopenfilename(title="Select your LATEST Award File for Jabil",
                                                       filetypes=[("Excel files", "*.xlsx;*.xls")])
         if second_file_path:
             # Load the file into a DataFrame without setting a header initially
@@ -212,5 +213,9 @@ def jabil_logic():
     open_file_btn = tk.Button(jabil_window, text="Select Excel Files", command=open_and_process_file,
                               bg=button_color, fg=button_text_color, font=("Verdana", 16))
     open_file_btn.pack(pady=10)
+
+    run_query = tk.Button(jabil_window, text="Run Forecast Query", command=new_function,
+                          bg=button_color, fg=button_text_color, font=("Verdana", 16))
+    run_query.pack(pady=10)
 
     press_action()

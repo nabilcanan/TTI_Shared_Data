@@ -3,6 +3,7 @@ from tkinter import filedialog, messagebox
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
+from Customers.plexus_query import new_function
 
 # Completed
 
@@ -208,3 +209,7 @@ def plexus_logic():
     open_file_btn = tk.Button(plexus_window, text="Select Excel Files", command=open_and_process_file,
                               bg=button_color, fg=button_text_color, font=("Verdana", 16))
     open_file_btn.pack(pady=10)
+
+    run_query = tk.Button(plexus_window, text="Run Forecast Query", command=new_function,
+                              bg=button_color, fg=button_text_color, font=("Verdana", 16))
+    run_query.pack(pady=10)
