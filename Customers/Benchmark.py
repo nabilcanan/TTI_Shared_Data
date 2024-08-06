@@ -59,6 +59,10 @@ def benchmark_logic():
             if header_row_idx is not None and isinstance(header_row_idx, int):
                 # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
+                # Clean and process data
+                df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
+                df_second['Benchmark P/N'] = df_second['Benchmark P/N'].astype(str).str.strip()
+
                 # Proceed with processing if 'Benchmark P/N' column is found
                 if 'Benchmark P/N' in df_second.columns:
                     df_first['On Contract'] = df_first['CPN'].isin(df_second['Benchmark P/N']).map(

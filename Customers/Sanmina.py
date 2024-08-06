@@ -76,14 +76,12 @@ def sanmina_logic():
             return False
 
     def process_second_file(df_first):
-        # Open a dialog to select the second file, typically the latest contract file for Sanmina
         second_file_path = filedialog.askopenfilename(title="Select your LATEST AWARD File for Sanmina",
                                                       filetypes=[("Excel files", "*.xlsx;*.xls")])
         if second_file_path:
-            # Load the file into a DataFrame without setting a header initially
             df_second_raw = pd.read_excel(second_file_path, header=None)
 
-            # Find the row index where the desired header ('Sanmina part #') is located
+            # Attempt to find the header row
             header_row_idx = None
             for idx, row in df_second_raw.iterrows():
                 if 'Item Number' in row.values:
@@ -91,18 +89,16 @@ def sanmina_logic():
                     break
 
             if header_row_idx is not None and isinstance(header_row_idx, int):
-                # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
-                # Proceed with processing if 'IPN' column is found
-                if 'Item Number' in df_second.columns:
-                    df_first['On Contract'] = df_first['CPN'].isin(df_second['Item Number']).map(
-                        {True: 'Y', False: ''})
-                    return True
-                else:
-                    messagebox.showerror("Error", "IPN column not found in the second file.")
-                    return False
+                # Clean and process data
+                df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
+                df_second['Item Number'] = df_second['Item Number'].astype(str).str.strip()
+
+                # Update 'On Contract' column
+                df_first['On Contract'] = df_first['CPN'].isin(df_second['Item Number']).map({True: 'Y', False: ''})
+                return True
             else:
-                messagebox.showerror("Error", "Header row with 'IPN' not found in the file.")
+                messagebox.showerror("Error", "Header row with 'Item Number' not found in the file.")
                 return False
         else:
             messagebox.showwarning("Cancelled", "Second file open cancelled.")

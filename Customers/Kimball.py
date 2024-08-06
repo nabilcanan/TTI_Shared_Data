@@ -35,7 +35,8 @@ def kimball_logic():
             # Warning message if the file selection is cancelled
             messagebox.showwarning("Cancelled", "First file open cancelled.")
 
-    def process_second_file(df_first):  # Need to adjust for actual contract or award file we are implementing
+    def process_second_file(df_first):
+        # Not actual Kimball contract, we didn't have one, So we used the creation program to finish this module
         # Open a dialog to select the second file, typically the latest contract file for Kimball
         second_file_path = filedialog.askopenfilename(title="Select your LATEST Contract File for Kimball",
                                                       filetypes=[("Excel files", "*.xlsx;*.xls")])
@@ -53,10 +54,13 @@ def kimball_logic():
             if header_row_idx is not None and isinstance(header_row_idx, int):
                 # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
+                # Clean and process data
+                df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
+                df_second['IPN'] = df_second['IPN'].astype(str).str.strip()
+
                 # Proceed with processing if 'IPN' column is found
                 if 'IPN' in df_second.columns:
-                    df_first['On Contract'] = df_first['CPN'].isin(df_second['IPN']).map(
-                        {True: 'Y', False: ''})
+                    df_first['On Contract'] = df_first['CPN'].isin(df_second['IPN']).map({True: 'Y', False: ''})
                     return True
                 else:
                     messagebox.showerror("Error", "IPN column not found in the second file.")

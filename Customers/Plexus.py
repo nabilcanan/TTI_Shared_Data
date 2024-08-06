@@ -55,6 +55,11 @@ def plexus_logic():
             if header_row_idx is not None and isinstance(header_row_idx, int):
                 # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
+
+                # Clean and process data
+                df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
+                df_second['Plexus part # '] = df_second['Plexus part # '].astype(str).str.strip()
+
                 # Proceed with processing if 'Plexus part #' column is found
                 if 'Plexus part # ' in df_second.columns:
                     df_first['On Contract'] = df_first['CPN'].isin(df_second['Plexus part # ']).map(

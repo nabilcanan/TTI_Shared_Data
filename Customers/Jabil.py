@@ -59,10 +59,13 @@ def jabil_logic():
             if header_row_idx is not None and isinstance(header_row_idx, int):
                 # Re-read the file with the correct header row
                 df_second = pd.read_excel(second_file_path, header=int(header_row_idx))
+                # Clean and process data
+                df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
+                df_second['JPN'] = df_second['JPN'].astype(str).str.strip()
+
                 # Proceed with processing if 'JPN' column is found
                 if 'JPN' in df_second.columns:
-                    df_first['On Contract'] = df_first['CPN'].isin(df_second['JPN']).map(
-                        {True: 'Y', False: ''})
+                    df_first['On Contract'] = df_first['CPN'].isin(df_second['JPN']).map({True: 'Y', False: ''})
                     return True
                 else:
                     messagebox.showerror("Error", "JPN column not found in the second file.")
@@ -201,9 +204,10 @@ def jabil_logic():
     # Instructions for program
     instructions = ("Instructions:\n"
                     "1. Select the file containing the CPNs.\n"
-                    "2. Choose the Latest Contract File for Jabil.\n"
+                    "2. Select the Latest Award File for Jabil.\n"
                     "3. Select the Jabil Backlog File.\n"
-                    "4. Pick the Jabil Sales History File.\n"
+                    "4. Select the Jabil Sales History File.\n"
+                    "5. Finally Select the Forecast Query. \n"
                     "5. Remember to SAVE your final file upon completion.")
 
     label = tk.Label(jabil_window, text=instructions, font=("Verdana", 20), bg=bg_color, fg=text_color)

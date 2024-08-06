@@ -41,11 +41,16 @@ def neotech_logic():
         second_file_path = filedialog.askopenfilename(title="Select your LATEST Contract File for Neotech",
                                                       filetypes=[("Excel files", "*.xlsx;*.xls")])
         if second_file_path:
-            # Load the file into a DataFrame without setting a header initially
-            print(df_first)
+            # Load the file into a DataFrame
+            print(df_first)  # This can be removed or commented out after confirming it's working as expected
             df_second = pd.read_excel(second_file_path)
-            # Find the row index where the desired header ('PartNum') is located
+
+            # Ensure data type consistency and clean any whitespace
+            df_first['CPN'] = df_first['CPN'].astype(str).str.strip()
             if 'PartNum' in df_second.columns:
+                df_second['PartNum'] = df_second['PartNum'].astype(str).str.strip()
+
+                # Check if PartNum from the second file matches any CPN in the first DataFrame
                 df_first['On Contract'] = df_first['CPN'].isin(df_second['PartNum']).map({True: 'Y', False: ''})
                 return True
             else:
